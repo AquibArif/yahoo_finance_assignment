@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Yahoo finance dashboard</title>
+  </head>
+  <body>
+    <form method="post" action="{% url 'compute_data' %}">    
+      {% csrf_token %}
+        <fieldset>      
+            <legend>Select Stock</legend>  
+            {%  for stock in stocks %}    
+              <input type="checkbox" name="favorite_stock" value="{{stock}}">{{stock}}<br> 
+              <label for="start">Start date:</label>
+              <input type="date" id="start" name="{{stock}}-start"
+
+              min="{{default_start_date}}" max="{{default_end_date}}">    
+              <label for="end">End date:</label> 
+              <input type="date" id="end" name="{{stock}}-end"
+              min="{{default_start_date}}" max="{{default_end_date}}"><br><br>
+            {% endfor %}     
+            <br>      
+            <input type="submit" value="Check Details" />      
+        </fieldset>      
+    </form>
+  </body>
+</html>

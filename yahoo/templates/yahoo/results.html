@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Yahoo finance Results</title>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+  </style>
+  </head>
+  <body>
+      <fieldset>      
+          <legend>Stocks details</legend>  
+              <table>
+                  <tr>
+                      <th>Stock</th>
+                      <th>High</th>
+                      <th>Low</th>
+                      <th>Mean</th>
+                      <th>Median</th>
+                      <th>Variance</th>
+                      <th>Moved Outside Range</th>
+                      <th>Moved Inside Range</th>
+                  </tr>
+                  {%  for stock,val in stock_data.items %}   
+                      <tr>
+                          <td>{{stock}}</td>
+                          <td>{{val.high|floatformat:2|default_if_none:""}}</td>
+                          <td>{{val.low|floatformat:2|default_if_none:""}}</td>
+                          <td>{{val.mean|floatformat:2|default_if_none:""}}</td>
+                          <td>{{val.median|floatformat:2|default_if_none:""}}</td>
+                          <td>{{val.variance|floatformat:2|default_if_none:""}}</td>
+                          <td>{{val.first_time_outside|default_if_none:"NA"}}</td>
+                          <td>{{val.first_time_inside|default_if_none:"NA"}}</td>
+                      </tr>
+                  {% endfor %} 
+              </table>
+          <br>      
+          <a href="{% url 'display_dashboard' %}">
+              <button>Back</button>
+          </a>    
+      </fieldset>      
+  </body>
+</html>
