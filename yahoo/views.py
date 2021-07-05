@@ -58,11 +58,11 @@ def get_favorite_stocks_data(request, favorite_stock):
             end_date = request.POST.get(stock_end)
             
             #  if user does not select start_date
-            if not end_date:
+            if not start_date:
                 # default start date 3 years from today
                 start_date = dt - timedelta(days=3*365)
             else:
-                tart_date = datetime.strptime(request.POST.get(stock_start), "%Y-%m-%d")
+                start_date = datetime.strptime(request.POST.get(stock_start), "%Y-%m-%d")
                 
             # if user does not select end_date
             if not end_date:
